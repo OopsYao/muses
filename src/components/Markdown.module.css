@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+.root {
+    font: 18px Ubuntu, Nunito, 'PingFang SC', 'Noto Sans CJK SC', 'Microsoft Yahei', sans-serif;
+
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.root code {
+    font-family: 'Ubuntu Mono', monospace;
+}
+
+/* Code block */
+.root pre code {
+    font-size: 16px;
+}

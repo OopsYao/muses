@@ -1,5 +1,6 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 
 module.exports = (env) => ({
   mode: env.dev ? 'development' : 'production',
@@ -16,6 +17,7 @@ module.exports = (env) => ({
   devServer: {
     // SPA support
     historyApiFallback: true,
+    host: '0.0.0.0', // Accessible externally
   },
   module: {
     rules: [
@@ -28,12 +30,20 @@ module.exports = (env) => ({
         test: /notes\/.*/,
         use: path.resolve(__dirname, 'src/star-loader.js'),
       },
+      {
+        test: /\.css$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+        ],
+      },
     ]
   },
   plugins: [
     new HtmlWebpackPlugin({
       title: 'See ya',
       template: path.resolve(__dirname, 'src/index.html'),
-    })
+    }),
+    new MiniCssExtractPlugin(),
   ],
 })
