@@ -2,6 +2,7 @@ const fs = require('fs/promises')
 const path = require('path')
 const fm = require('front-matter')
 const markdownLinkExtractor = require('markdown-link-extractor')
+const { extractFootnoteLinks } = require('./markdownUtils')
 
 let globalMeta
 let links
@@ -44,7 +45,7 @@ const getRawMeta = async (path) => {
     }
     const content = (await fs.readFile(targetFile)).toString()
     const { attributes: fileAttr } = fm(content)
-    const links = markdownLinkExtractor(content)
+    const links = [...markdownLinkExtractor(content), ...extractFootnoteLinks(content)]
     const mentioned = links.filter(l => !l.includes('/'))
     const { ...misc } = { ...dirAttr, ...fileAttr }
     const meta = {
