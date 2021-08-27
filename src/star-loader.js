@@ -2,7 +2,7 @@ const { getMeta } = require('./metaInfo')
 const MarkdownIt = require('markdown-it')
 const fm = require('front-matter')
 
-const md = MarkdownIt()
+const md = MarkdownIt().use(require('markdown-it-footnote'))
 const process = async (path, content) => {
     const segs = path.split('/')
     const name = segs[segs.length - 1]
