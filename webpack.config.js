@@ -27,7 +27,7 @@ module.exports = (env) => ({
         use: 'babel-loader',
       },
       {
-        test: /notes\/.*/,
+        test: /notes/,
         use: path.resolve(__dirname, 'src/star-loader.js'),
       },
       {
