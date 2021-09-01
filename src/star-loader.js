@@ -1,8 +1,18 @@
 const { getMeta } = require('./metaInfo')
 const MarkdownIt = require('markdown-it')
 const fm = require('front-matter')
+const hljs = require('highlight.js')
 
-const md = MarkdownIt().use(require('markdown-it-footnote'))
+const md = MarkdownIt({
+    highlight: function(str, lang) {
+        if (lang && hljs.getLanguage(lang)) {
+            try {
+                return hljs.highlight(str, { language: lang }).value;
+            } catch { }
+        }
+        return ''; // use external default escaping
+    }
+}).use(require('markdown-it-footnote'))
 const process = async (path, content) => {
     const segs = path.split('/')
     const name = segs[segs.length - 1]
