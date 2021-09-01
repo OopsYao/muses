@@ -9,12 +9,7 @@ func_list = []
 for i in range(3):
     def myfunc():
         return i
-    # func_list.append(myfunc)
-    def get_func(j):
-        def fun():
-            return j
-        return fun
-    func_list.append(get_func(i))
+    func_list.append(myfunc)
 
 for f in func_list:
     print(f())
