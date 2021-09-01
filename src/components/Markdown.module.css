@@ -16,3 +16,7 @@
 .root pre code {
     font-size: 16px;
 }
+.root pre {
+    overflow-x: auto;
+    background: #eff2f3;
+}
