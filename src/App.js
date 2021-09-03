@@ -8,23 +8,23 @@ const pageSelect = async (page) => {
 
 export default () => {
     const star = window.location.pathname.split('/')[1]
-    const [html, setHtml] = useState('')
+    const [el, setElement] = useState(star ? <Markdown /> : <h1>Hello World</h1>)
     useEffect(() => {
         (async () => {
             if (star) {
                 try {
                     const { html } = await pageSelect(star)
-                    setHtml(html)
+                    setElement(<Markdown html={html} />)
                 } catch {
-                    setHtml(<h1>404</h1>)
+                    setElement(<Markdown html={`<h1>404</h1>`} />)
                 }
+            } else {
+                const { default: Graph } = await import('./components/Graph')
+                const nodes = [{ id: 'gogo' }, { id: 'df' }]
+                const links = [{ from: 'gogo', to: 'df' }]
+                setElement(<Graph nodes={nodes} links={links} />)
             }
         })()
     }, [])
-
-    if (star) {
-        return <Markdown html={html} />
-    } else {
-        return <h1>Hello World</h1>
-    }
+    return el
 }
