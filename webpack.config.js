@@ -1,6 +1,7 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin")
 
 module.exports = (env) => ({
   mode: env.dev ? 'development' : 'production',
@@ -18,6 +19,12 @@ module.exports = (env) => ({
     // SPA support
     historyApiFallback: true,
     host: '0.0.0.0', // Accessible externally
+  },
+  optimization: {
+    minimizer: [
+      '...',
+      new CssMinimizerPlugin(),
+    ],
   },
   module: {
     rules: [
