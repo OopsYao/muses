@@ -50,6 +50,7 @@ module.exports = (env) => ({
     new HtmlWebpackPlugin({
       title: 'See ya',
       template: path.resolve(__dirname, 'src/index.html'),
+      favicon: 'src/favicon.svg',
     }),
     new MiniCssExtractPlugin(),
   ],
