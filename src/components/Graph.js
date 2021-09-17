@@ -14,14 +14,15 @@ export default ({ nodes, links }) => {
     useEffect(() => {
         const node = d3.select(`#${nodeId}`)
             .selectAll('circle').data(nodes).enter().append('circle')
-            .attr('r', 18)
+            .attr('r', 3)
 
         const text = d3.select(`#${textId}`)
             .selectAll('text').data(nodes).enter().append('text')
-            .text(({ id }) => id)
+            .text(({ id, label }) => label || id)
 
         const link = d3.select(`#${linkId}`)
             .selectAll('polyline').data(d3Links).enter().append('polyline')
+             .attr('stroke-dasharray', '1')
 
         const simulation = d3
             .forceSimulation(nodes)
@@ -30,7 +31,7 @@ export default ({ nodes, links }) => {
             .force('center', d3.forceCenter(width / 2, height / 2))
         simulation.on('tick', () => {
             node.attr('cx', (d) => d.x).attr('cy', (d) => d.y)
-            text.attr('x', (d) => d.x).attr('y', (d) => d.y)
+            text.attr('x', (d) => 4 + d.x).attr('y', (d) => 2 + d.y)
             link.attr(
                 'points',
                 ({ source: { x: x1, y: y1 }, target: { x: x2, y: y2 } }) => {
@@ -46,6 +47,6 @@ export default ({ nodes, links }) => {
     return (<svg viewBox={[0, 0, width, height].join(' ')}>
         <g id={nodeId} />
         <g id={textId} />
-        <g id={linkId} />
+        <g id={linkId} stroke='#222725' />
     </svg>)
 }

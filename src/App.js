@@ -20,7 +20,7 @@ export default () => {
                 }
             } else {
                 const { default: Graph } = await import('./components/Graph')
-                const nodes = [{ id: 'gogo' }, { id: 'df' }]
+                const nodes = [{ id: 'gogo', label: '社交牛逼症' }, { id: 'df' }]
                 const links = [{ from: 'gogo', to: 'df' }]
                 setElement(<Graph nodes={nodes} links={links} />)
             }
