@@ -5,13 +5,13 @@ import uniqueId from 'lodash/uniqueId'
 
 const d3 = { ...d3Selection, ...d3Force }
 export default ({ nodes, links }) => {
+    const d3Links = links.map(({ from, to }) => ({ source: from, target: to }))
     const [nodeId] = useState(uniqueId('svg-'))
     const [textId] = useState(uniqueId('svg-'))
     const [linkId] = useState(uniqueId('svg-'))
     const [width, height] = [1000, 1000]
 
     useEffect(() => {
-        const d3Links = links.map(({ from: source, to: target }) => ({ source, target }))
         const node = d3.select(`#${nodeId}`)
             .selectAll('circle').data(nodes).enter().append('circle')
             .attr('r', 18)
@@ -21,7 +21,7 @@ export default ({ nodes, links }) => {
             .text(({ id }) => id)
 
         const link = d3.select(`#${linkId}`)
-            .selectAll('polyline').data(links).enter().append('polyline')
+            .selectAll('polyline').data(d3Links).enter().append('polyline')
 
         const simulation = d3
             .forceSimulation(nodes)
