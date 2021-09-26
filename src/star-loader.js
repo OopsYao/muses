@@ -12,7 +12,7 @@ const md = MarkdownIt({
         }
         return ''; // use external default escaping
     }
-}).use(require('markdown-it-footnote'))
+}).use(require('markdown-it-footnote')).use(require('markdown-it-katex'))
 const process = async (path, content) => {
     const segs = path.split('/')
     const name = segs[segs.length - 1]

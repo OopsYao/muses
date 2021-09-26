@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 @import 'highlight.js/styles/github.css';
+@import 'katex/dist/katex.min.css';
 
 .root {
     font: 18px Ubuntu, Nunito, 'PingFang SC', 'Noto Sans CJK SC', 'Microsoft Yahei', sans-serif;
@@ -19,4 +20,8 @@
 .root pre {
     overflow-x: auto;
     background: #eff2f3;
+}
+
+:global(.katex) {
+    font-size: 1em;
 }
